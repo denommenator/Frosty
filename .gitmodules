@@ -1,0 +1,3 @@
+[submodule "extern/IceSYCL"]
+	path = extern/IceSYCL
+	url = https://github.com/denommenator/IceSYCL.git
