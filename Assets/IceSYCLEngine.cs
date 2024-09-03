@@ -21,7 +21,7 @@ namespace Frosty
         // private static extern void delete_ParticleState(IntPtr particle_state);
 
         [DllImport("libIceSYCL_NativeAPI")]
-        private static extern IntPtr create_engine(int particle_count, IntPtr positions, IntPtr velocities, IntPtr masses, double h);
+        private static extern IntPtr create_engine(int particle_count, IntPtr positions, IntPtr velocities, double h);
 
         [DllImport("libIceSYCL_NativeAPI")]
         private static extern void copy_current_positions(IntPtr engine, IntPtr current_positions_raw_ptr);
@@ -42,7 +42,6 @@ namespace Frosty
             ParticleCount = numParticles;
             List<double> positions_input = new List<double>();
             List<double> velocities_input = new List<double>();
-            List<double> masses_input = new List<double>();
             for (int pid = 0; pid < numParticles; pid++)
             {
                 positions_input.Add(positions[pid].x);
@@ -50,23 +49,18 @@ namespace Frosty
 
                 velocities_input.Add(velocities[pid].x);
                 velocities_input.Add(velocities[pid].y);
-
-                masses_input.Add(1.0);
             }
 
             var positions_raw = Marshal.AllocHGlobal(positions_input.Count * sizeof(double));
             var velocities_raw = Marshal.AllocHGlobal(velocities_input.Count * sizeof(double));
-            var masses_raw = Marshal.AllocHGlobal(masses_input.Count * sizeof(double));
 
             Marshal.Copy(positions_input.ToArray(), 0, positions_raw, positions_input.Count);
             Marshal.Copy(velocities_input.ToArray(), 0, velocities_raw, velocities_input.Count);
-            Marshal.Copy(masses_input.ToArray(), 0, masses_raw, masses_input.Count);
 
             double h = 1.0;
-            Engine = create_engine(ParticleCount, positions_raw, velocities_raw, masses_raw, h);
+            Engine = create_engine(ParticleCount, positions_raw, velocities_raw, h);
 
             Marshal.FreeHGlobal(velocities_raw);
-            Marshal.FreeHGlobal(masses_raw);
 
             CurrentPosition = new double[positions_input.Count];
             CurrentPositionPtr = Marshal.AllocHGlobal(positions_input.Count * sizeof(double));
