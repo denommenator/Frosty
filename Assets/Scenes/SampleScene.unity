@@ -243,6 +243,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1a38c816c35148c79c5a0f3f26330a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WallStiffness: 1000
+  CSpeedOfSound: 1000
   NumSecsToSimulate: 5
   ContinueSimulation: 1
   NumFramesSimulated: 0

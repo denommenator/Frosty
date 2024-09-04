@@ -7,6 +7,8 @@ namespace Frosty
     public class DefaultScene : MonoBehaviour
     {
         private ParticleController Controller;
+        public double WallStiffness = 1000;
+        public double CSpeedOfSound = 1000;
         public int NumSecsToSimulate = 5;
         public bool ContinueSimulation = true;
         public int NumFramesSimulated;
@@ -76,8 +78,8 @@ namespace Frosty
             }
             */
 
-            IceSYCLEngine engine = new IceSYCLEngine(initial_position_input.ToArray(), initial_velocity_input.ToArray());
-            Controller = new ParticleController(engine);
+            IceSYCLEngine engine = new IceSYCLEngine(initial_position_input.ToArray(), initial_velocity_input.ToArray(), WallStiffness);
+            Controller = new ParticleController(engine, CSpeedOfSound);
         }
 
         private void FixedUpdate()

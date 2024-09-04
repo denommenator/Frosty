@@ -21,7 +21,7 @@ namespace Frosty
         // private static extern void delete_ParticleState(IntPtr particle_state);
 
         [DllImport("libIceSYCL_NativeAPI")]
-        private static extern IntPtr create_engine(int particle_count, IntPtr positions, IntPtr velocities, double h);
+        private static extern IntPtr create_engine(int particle_count, IntPtr positions, IntPtr velocities, double h, double wall_stiffness);
 
         [DllImport("libIceSYCL_NativeAPI")]
         private static extern void copy_current_positions(IntPtr engine, IntPtr current_positions_raw_ptr);
@@ -30,12 +30,12 @@ namespace Frosty
         private static extern void copy_deformation_gradients(IntPtr engine, IntPtr deformation_gradients_raw_ptr);
 
         [DllImport("libIceSYCL_NativeAPI")]
-        private static extern void step_frame(IntPtr engine);
+        private static extern void step_frame(IntPtr engine, double c_speed_of_sound);
 
         [DllImport("libIceSYCL_NativeAPI")]
         private static extern void delete_engine(IntPtr engine);
 
-        public IceSYCLEngine(Vector2[] positions, Vector2[] velocities)
+        public IceSYCLEngine(Vector2[] positions, Vector2[] velocities, double wall_stiffness)
         {
             Debug.Log(System.IO.File.Exists("Assets/Plugins/libIceSYCL_NativeAPI.so"));
             int numParticles = positions.Length;
@@ -58,7 +58,7 @@ namespace Frosty
             Marshal.Copy(velocities_input.ToArray(), 0, velocities_raw, velocities_input.Count);
 
             double h = 1.0;
-            Engine = create_engine(ParticleCount, positions_raw, velocities_raw, h);
+            Engine = create_engine(ParticleCount, positions_raw, velocities_raw, h, wall_stiffness);
 
             Marshal.FreeHGlobal(velocities_raw);
 
@@ -70,9 +70,9 @@ namespace Frosty
 
         }
         
-        public void StepFrame()
+        public void StepFrame(double c_speed_of_sound)
         {
-            step_frame(Engine);
+            step_frame(Engine, c_speed_of_sound);
         }
         
         public Vector3[] GetPositions()
