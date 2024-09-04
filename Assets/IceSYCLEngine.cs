@@ -30,7 +30,7 @@ namespace Frosty
         private static extern void copy_deformation_gradients(IntPtr engine, IntPtr deformation_gradients_raw_ptr);
 
         [DllImport("libIceSYCL_NativeAPI")]
-        private static extern void step_frame(IntPtr engine, double c_speed_of_sound);
+        private static extern void step_frame(IntPtr engine, double c_speed_of_sound, double mu_damping);
 
         [DllImport("libIceSYCL_NativeAPI")]
         private static extern void delete_engine(IntPtr engine);
@@ -70,9 +70,9 @@ namespace Frosty
 
         }
         
-        public void StepFrame(double c_speed_of_sound)
+        public void StepFrame(double c_speed_of_sound, double mu_damping)
         {
-            step_frame(Engine, c_speed_of_sound);
+            step_frame(Engine, c_speed_of_sound, mu_damping);
         }
         
         public Vector3[] GetPositions()
