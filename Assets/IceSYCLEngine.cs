@@ -30,7 +30,7 @@ namespace Frosty
         private static extern void copy_deformation_gradients(IntPtr engine, IntPtr deformation_gradients_raw_ptr);
 
         [DllImport("libIceSYCL_NativeAPI")]
-        private static extern void step_frame(IntPtr engine, double c_speed_of_sound, double mu_damping);
+        private static extern void step_frame(IntPtr engine, int num_steps_per_frame, double c_speed_of_sound, double mu_damping, double gravity);
 
         [DllImport("libIceSYCL_NativeAPI")]
         private static extern void delete_engine(IntPtr engine);
@@ -57,7 +57,7 @@ namespace Frosty
             Marshal.Copy(positions_input.ToArray(), 0, positions_raw, positions_input.Count);
             Marshal.Copy(velocities_input.ToArray(), 0, velocities_raw, velocities_input.Count);
 
-            double h = 1.0;
+            double h = 5.0;
             Engine = create_engine(ParticleCount, positions_raw, velocities_raw, h, wall_stiffness);
 
             Marshal.FreeHGlobal(velocities_raw);
@@ -70,9 +70,9 @@ namespace Frosty
 
         }
         
-        public void StepFrame(double c_speed_of_sound, double mu_damping)
+        public void StepFrame(int num_steps_per_frame, double c_speed_of_sound, double mu_damping, double gravity)
         {
-            step_frame(Engine, c_speed_of_sound, mu_damping);
+            step_frame(Engine, num_steps_per_frame, c_speed_of_sound, mu_damping, gravity);
         }
         
         public Vector3[] GetPositions()

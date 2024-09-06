@@ -10,13 +10,29 @@ namespace Frosty
         public double WallStiffness = 1000;
         public double CSpeedOfSound = 1000;
         public double MuDamping = 1.0;
+        public double Gravity = 981.0f;
+        public int NumStepsPerFrame = 50;
         public int NumSecsToSimulate = 5;
         public bool ContinueSimulation = true;
         public int NumFramesSimulated;
         public int CurrentFrameNumber;
         void Start()
         {
+            List<Vector2> initial_position_input = new List<Vector2>();
+            List<Vector2> initial_velocity_input = new List<Vector2>();
+            /*
             
+            for (int i = 0; i < 100; i++)
+            {
+                initial_position_input.Add(new Vector2(0, 5 * i));
+            }
+            
+            for (int i = 0; i < 100; i++)
+            {
+                initial_velocity_input.Add(new Vector2(0.01f * i, 0));
+            }
+            */
+            /*
             List<Vector2> initial_position_input = new List<Vector2>()
             {
                 new Vector2(-30.0f, 5.0f),
@@ -60,27 +76,32 @@ namespace Frosty
                 new Vector2(-200.0f, 100.0f),
                 new Vector2(-200.0f, 100.0f)
             };
+            */
                 
-            /*
-            int numParticles = 10;
-            for (int pid = 0; pid < numParticles; pid++)
+            
+            int particle_width = 10;
+            int particle_height = 10;
+            int numParticles = particle_width * particle_height;
+            for (int i = 0; i < particle_width; i++)
             {
-                initial_position_input.Add(new Vector2(
-                    -100.0f / numParticles * pid,
-                    5.0f));
+                for (int j = 0; j < particle_height; j++)
+                {
+                    initial_position_input.Add(new Vector2(
+                        -100.0f / particle_width * i,
+                        5.0f + 5 * j));
+                }
             }
 
-            List<Vector2> initial_velocity_input = new List<Vector2>();
             for (int pid = 0; pid < numParticles; pid++)
             {
                 initial_velocity_input.Add(new Vector2(
                     100.0f,
                     100.0f / numParticles * pid));
             }
-            */
+            
 
             IceSYCLEngine engine = new IceSYCLEngine(initial_position_input.ToArray(), initial_velocity_input.ToArray(), WallStiffness);
-            Controller = new ParticleController(engine, CSpeedOfSound, MuDamping);
+            Controller = new ParticleController(engine, NumStepsPerFrame, CSpeedOfSound, MuDamping, Gravity);
         }
 
         private void FixedUpdate()
