@@ -31,6 +31,9 @@ namespace Frosty
 
         [DllImport("libIceSYCL_NativeAPI")]
         private static extern void step_frame(IntPtr engine, int num_steps_per_frame, double c_speed_of_sound, double mu_damping, double gravity);
+        
+        [DllImport("libIceSYCL_NativeAPI")]
+        private static extern void step_frame_implicit(IntPtr engine, int num_steps_per_frame, int num_descent_steps, double c_speed_of_sound, double mu_damping, double gravity);
 
         [DllImport("libIceSYCL_NativeAPI")]
         private static extern void delete_engine(IntPtr engine);
@@ -70,9 +73,9 @@ namespace Frosty
 
         }
         
-        public void StepFrame(int num_steps_per_frame, double c_speed_of_sound, double mu_damping, double gravity)
+        public void StepFrame(int num_steps_per_frame, int num_descent_steps, double c_speed_of_sound, double mu_damping, double gravity)
         {
-            step_frame(Engine, num_steps_per_frame, c_speed_of_sound, mu_damping, gravity);
+            step_frame_implicit(Engine, num_steps_per_frame, num_descent_steps, c_speed_of_sound, mu_damping, gravity);
         }
         
         public Vector3[] GetPositions()

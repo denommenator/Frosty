@@ -11,7 +11,8 @@ namespace Frosty
         public double CSpeedOfSound = 1000;
         public double MuDamping = 1.0;
         public double Gravity = 981.0f;
-        public int NumStepsPerFrame = 50;
+        public int NumStepsPerFrame = 1;
+        public int NumDescentSteps = 20;
         public int NumSecsToSimulate = 5;
         public bool ContinueSimulation = true;
         public int NumFramesSimulated;
@@ -79,16 +80,16 @@ namespace Frosty
             */
                 
             
-            int particle_width = 10;
-            int particle_height = 10;
+            int particle_width = 40;
+            int particle_height = 20;
             int numParticles = particle_width * particle_height;
             for (int i = 0; i < particle_width; i++)
             {
                 for (int j = 0; j < particle_height; j++)
                 {
                     initial_position_input.Add(new Vector2(
-                        -100.0f / particle_width * i,
-                        5.0f + 5 * j));
+                        -100.0f + 5 * i,
+                        -50.0f + 5 * j));
                 }
             }
 
@@ -96,12 +97,12 @@ namespace Frosty
             {
                 initial_velocity_input.Add(new Vector2(
                     100.0f,
-                    100.0f / numParticles * pid));
+                    0.0f));
             }
             
 
             IceSYCLEngine engine = new IceSYCLEngine(initial_position_input.ToArray(), initial_velocity_input.ToArray(), WallStiffness);
-            Controller = new ParticleController(engine, NumStepsPerFrame, CSpeedOfSound, MuDamping, Gravity);
+            Controller = new ParticleController(engine, NumStepsPerFrame, NumDescentSteps, CSpeedOfSound, MuDamping, Gravity);
         }
 
         private void FixedUpdate()

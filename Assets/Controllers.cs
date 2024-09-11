@@ -6,13 +6,14 @@ namespace Frosty
 {
     public class ParticleController
     {
-        public ParticleController(IceSYCLEngine iceSYCLEngine, int numStepsPerFrame, double cSpeedOfSound, double muDamping, double gravity)
+        public ParticleController(IceSYCLEngine iceSYCLEngine, int numStepsPerFrame, int numDescentSteps, double cSpeedOfSound, double muDamping, double gravity)
         {
             BallRenderer = new BallRenderer(iceSYCLEngine.ParticleCount);
             SimulationFrames = new SimulationFrames<Vector3[]>();
             IceSYCLEngine = iceSYCLEngine;
             CSpeedOfSound = cSpeedOfSound;
             NumStepsPerFrame = numStepsPerFrame;
+            NumDescentSteps= numDescentSteps;
             MuDamping = muDamping;
             Gravity = gravity;
         }
@@ -26,6 +27,7 @@ namespace Frosty
         public double MuDamping;
         public double Gravity;
         public int NumStepsPerFrame;
+        public int NumDescentSteps;
 
         public void RunSimulation(int numFrames)
         {
@@ -33,7 +35,7 @@ namespace Frosty
             {
                 //Debug.Log("Stepping the simulation!");
                 Debug.Log("Running a new frame!");
-                IceSYCLEngine.StepFrame(NumStepsPerFrame, CSpeedOfSound, MuDamping, Gravity);
+                IceSYCLEngine.StepFrame(NumStepsPerFrame, NumDescentSteps, CSpeedOfSound, MuDamping, Gravity);
                 Vector3[] particlePositions = IceSYCLEngine.GetPositions();
                 SimulationFrames.QueueNewFrame(particlePositions);
             }

@@ -244,11 +244,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WallStiffness: 1000
-  CSpeedOfSound: 10000
-  MuDamping: 0.95
+  CSpeedOfSound: 50000
+  MuDamping: 0.98
   Gravity: 981
-  NumStepsPerFrame: 50
-  NumSecsToSimulate: 5
+  NumStepsPerFrame: 10
+  NumDescentSteps: 3
+  NumSecsToSimulate: 10
   ContinueSimulation: 1
   NumFramesSimulated: 0
   CurrentFrameNumber: 0
