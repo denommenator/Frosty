@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -6,9 +7,9 @@ namespace Frosty
 {
     public class ParticleController
     {
-        public ParticleController(IceSYCLEngine iceSYCLEngine, int numStepsPerFrame, int numDescentSteps, double muConstitutive, double lambdaConstitutive, double muDamping, double gravity)
+        public ParticleController(IceSYCLEngine iceSYCLEngine, int numStepsPerFrame, int numDescentSteps, double muConstitutive, double lambdaConstitutive, double muDamping, double gravity, List<Particle> particles)
         {
-            BallRenderer = new BallRenderer(iceSYCLEngine.ParticleCount);
+            BallRenderer = new BallRenderer(particles);
             SimulationFrames = new SimulationFrames<Vector3[]>();
             IceSYCLEngine = iceSYCLEngine;
             MuConstitutive = muConstitutive;

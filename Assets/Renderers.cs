@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Frosty
@@ -5,17 +6,17 @@ namespace Frosty
 public class BallRenderer
 {
     public GameObject[] Balls;
-    public BallRenderer(int particleCount)
+    public BallRenderer(List<Particle> particles)
     {
-        Balls = new GameObject[particleCount];
+        Balls = new GameObject[particles.Count];
         //DeformationLines = new GameObject[numParticles];
 
         for (int i = 0; i < Balls.Length; i++)
         {
             Balls[i] = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            Balls[i].transform.localScale = 5 * Vector3.one;
+            Balls[i].transform.localScale = particles[i].Radius * Vector3.one;
             Balls[i].GetComponent<MeshRenderer>().material = new Material(Shader.Find("Standard"));
-            Balls[i].GetComponent<MeshRenderer>().material.color = Color.red;
+            Balls[i].GetComponent<MeshRenderer>().material.color = particles[i].Color;
         }
     }
 
