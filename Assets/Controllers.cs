@@ -28,6 +28,7 @@ namespace Frosty
         public double Gravity;
         public int NumStepsPerFrame;
         public int NumDescentSteps;
+        public bool LiveView = true;
 
         public void RunSimulation(int numFrames)
         {
@@ -49,8 +50,17 @@ namespace Frosty
             {
                 return;
             }
-            particlePositions = SimulationFrames.GetFrame(FrameNumber);
+            
+            if (LiveView)
+            {
+                particlePositions = SimulationFrames.GetFrame(SimulationFrames.NumCurrentFrames() - 1);
+            }
+            else
+            {
+                particlePositions = SimulationFrames.GetFrame(FrameNumber);
+            }
             BallRenderer.UpdateBallPositions(particlePositions);
+            
             if (FrameNumber == SimulationFrames.NumCurrentFrames() - 1)
             {
                 FrameNumber = 0;
@@ -59,8 +69,8 @@ namespace Frosty
             {
                 FrameNumber++;
             }
-            
-            
+
+
         }
         
         public int NumFramesSimulated()

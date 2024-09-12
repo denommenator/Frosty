@@ -248,11 +248,12 @@ MonoBehaviour:
   MuDamping: 0.98
   Gravity: 981
   NumStepsPerFrame: 10
-  NumDescentSteps: 3
+  NumDescentSteps: 10
   NumSecsToSimulate: 10
   ContinueSimulation: 1
   NumFramesSimulated: 0
   CurrentFrameNumber: 0
+  LiveView: 1
 --- !u!4 &1823817809
 Transform:
   m_ObjectHideFlags: 0

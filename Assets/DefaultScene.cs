@@ -14,9 +14,11 @@ namespace Frosty
         public int NumStepsPerFrame = 1;
         public int NumDescentSteps = 20;
         public int NumSecsToSimulate = 5;
+        public float H = 5;
         public bool ContinueSimulation = true;
         public int NumFramesSimulated;
         public int CurrentFrameNumber;
+        public bool LiveView = true;
         void Start()
         {
             List<Vector2> initial_position_input = new List<Vector2>();
@@ -96,12 +98,12 @@ namespace Frosty
             for (int pid = 0; pid < numParticles; pid++)
             {
                 initial_velocity_input.Add(new Vector2(
-                    100.0f,
+                    0.0f,
                     0.0f));
             }
             
 
-            IceSYCLEngine engine = new IceSYCLEngine(initial_position_input.ToArray(), initial_velocity_input.ToArray(), WallStiffness);
+            IceSYCLEngine engine = new IceSYCLEngine(initial_position_input.ToArray(), initial_velocity_input.ToArray(), H, WallStiffness);
             Controller = new ParticleController(engine, NumStepsPerFrame, NumDescentSteps, CSpeedOfSound, MuDamping, Gravity);
         }
 
@@ -111,7 +113,7 @@ namespace Frosty
             {
                 Controller.ContinueSimulationAsync(50 * NumSecsToSimulate);
             }
-
+            Controller.LiveView = LiveView;
             NumFramesSimulated = Controller.NumFramesSimulated();
             CurrentFrameNumber = Controller.FrameNumber;
             ContinueSimulation = false;
