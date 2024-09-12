@@ -8,7 +8,8 @@ namespace Frosty
     {
         private ParticleController Controller;
         public double WallStiffness = 1000;
-        public double CSpeedOfSound = 1000;
+        public double MuConstitutive = 1000;
+        public double LambdaConstitutive = 0.0;
         public double MuDamping = 1.0;
         public double Gravity = 981.0f;
         public int NumStepsPerFrame = 1;
@@ -104,7 +105,7 @@ namespace Frosty
             
 
             IceSYCLEngine engine = new IceSYCLEngine(initial_position_input.ToArray(), initial_velocity_input.ToArray(), H, WallStiffness);
-            Controller = new ParticleController(engine, NumStepsPerFrame, NumDescentSteps, CSpeedOfSound, MuDamping, Gravity);
+            Controller = new ParticleController(engine, NumStepsPerFrame, NumDescentSteps, MuConstitutive, LambdaConstitutive, MuDamping, Gravity);
         }
 
         private void FixedUpdate()
