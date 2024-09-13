@@ -9,7 +9,7 @@ namespace Frosty
     public class Scene : MonoBehaviour
     {
         private ParticleController Controller;
-        //public IBuildScene SceneBuilder;
+        public IBuildScene SceneBuilder;
         
         public int NumStepsPerFrame = 1;
         public int NumDescentSteps = 20;
@@ -27,8 +27,8 @@ namespace Frosty
 
         private void Start()
         {
-            IBuildScene sceneBuilder = GetComponent<IBuildScene>();
-            Controller = sceneBuilder.BuildScene(H, MuDamping, Gravity, NumStepsPerFrame);
+            //IBuildScene sceneBuilder = GetComponent<IBuildScene>();
+            Controller = SceneBuilder.BuildScene(H, MuDamping, Gravity, NumStepsPerFrame);
         }
         
         private void FixedUpdate()

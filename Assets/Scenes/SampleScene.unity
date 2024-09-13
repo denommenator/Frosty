@@ -208,7 +208,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -47.6, y: -61.5, z: -10}
+  m_LocalPosition: {x: -1.2, y: 60.2, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -224,6 +224,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1823817809}
   - component: {fileID: 1823817808}
+  - component: {fileID: 1823817811}
   - component: {fileID: 1823817810}
   m_Layer: 0
   m_Name: GameObject
@@ -244,11 +245,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1a38c816c35148c79c5a0f3f26330a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NumStepsPerFrame: 50
+  SceneBuilder: {fileID: 1823817811}
+  NumStepsPerFrame: 400
   NumDescentSteps: 1
   NumSecsToSimulate: 10
   MuDamping: 0.95
-  Gravity: 0
+  Gravity: 981
   H: 1
   NumFramesSimulated: 0
   CurrentFrameNumber: 0
@@ -278,17 +280,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 1823817807}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd2ceb32c6bd4e4796a3bf017e774148, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ac5cba5c2f8472b924a2d65b6c9b72a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WallStiffness: 1000
   MuConstitutive: 38000
-  LambdaConstitutive: 58000
-  ThetaC: 0.02
-  ThetaS: 0.005
+  LambdaConstitutive: 58800
+  ThetaC: 0.01
+  ThetaS: 0.1
   Xi: 10
   MaxExp: 20
   Density: 0.4
+--- !u!114 &1823817811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823817807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd2ceb32c6bd4e4796a3bf017e774148, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SnowParameters: {fileID: 1823817810}
+  WallStiffness: 10000
+  BaseRadius: 5
+  SnowBallSizeFactor: 0.2
+  SnowBallHeightFactor: 0.8
+  SnowBallVelocity: {x: 250, y: 60}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
