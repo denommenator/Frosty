@@ -128,7 +128,7 @@ namespace Frosty
             var positions = particles.Select(p => p.Position).ToArray();
             var velocities = particles.Select(p => p.Velocity).ToArray();
             double wall_width = 100.0;
-            IceSYCLEngine iceSyclEngine = new IceSYCLEngine(positions, velocities, h, WallStiffness, wall_width);
+            IceSYCLEngine iceSyclEngine = new IceSYCLEngine(positions, velocities, h, WallStiffness, wall_width, 1.0);
             CorotatedEngine corotatedEngine = new CorotatedEngine(iceSyclEngine);
             corotatedEngine.NumStepsPerFrame = num_steps_per_frame;
             corotatedEngine.MuDamping = mu_damping;

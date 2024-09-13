@@ -15,6 +15,7 @@ namespace Frosty
         public double ThetaS = 5.0E-3;
         public double Xi = 10;
         public double MaxExp = 10;
+        public double Density = 0.4;
         
         public override ParticleController BuildScene(double h, double mu_damping, double gravity, int num_steps_per_frame)
         {
@@ -83,57 +84,44 @@ namespace Frosty
             float particle_spacing = math.sqrt(h_float * h_float / num_particles_per_cell);
 
 
-            float radius = 3;
-            float offset_factor = 0.0f;
-            Vector2 center_0 = new Vector2(-30, 30);
-            Vector2 velocity_0 = new Vector2(150, 0);
-            Vector2 center_1 = new Vector2(30, 30.0f + offset_factor * 2 * radius);
-            Vector2 velocity_1 = new Vector2(-150, 0);
+            float radius_base = 5.0f;
+            float middle_shrinkage = 0.7f;
+            float top_shrinkage = 0.49f;
+
+            float radius_middle = radius_base * middle_shrinkage;
+            float radius_top = radius_base * top_shrinkage;
+
+            float middle_center = 2 * radius_base + radius_middle;
+            float top_center = 2 * (radius_base + radius_middle) + radius_top;
+            
+            Vector2 center_base = new Vector2(0, radius_base);
+            Vector2 center_middle = new Vector2(0, middle_center);
+            Vector2 center_top = new Vector2(0, top_center);
 
             List<Particle> particles =
-                SceneBuilder.MakeParticleSphere(center_0, velocity_0, 0.0f, radius, particle_spacing, Color.red);
-            particles.AddRange(SceneBuilder.MakeParticleSphere(center_1, velocity_1, 0.0f, radius, particle_spacing,
+                SceneBuilder.MakeParticleSphere(center_base, Vector2.zero, 0.0f, radius_base, particle_spacing, Color.blue);
+            particles.AddRange(SceneBuilder.MakeParticleSphere(center_middle, Vector2.zero, 0.0f, radius_middle, particle_spacing,
                 Color.blue));
-            
-            
-            
-            
-            
-            
-            
-            
-            /*
-            float particle_width = 30;
-            float particle_height = 40;
+            particles.AddRange(SceneBuilder.MakeParticleSphere(center_top, Vector2.zero, 0.0f, radius_top, particle_spacing,
+                Color.blue));
 
-            float wall_width = 100.0f;
-            
-            Vector2 bottom_left_corner = new Vector2(- particle_width / 2.0f, 0.0f + 2 * h); 
-            for (int i = 0; i * particle_spacing < particle_width; i++)
-            {
-                for (int j = 0; j * particle_spacing < particle_height; j++)
-                {
-                    Vector2 offset = new Vector2(particle_spacing * i, particle_spacing * j);
-                    Vector2 randomization = 0.1f * particle_spacing * UnityEngine.Random.insideUnitCircle;
-                    initial_position_input.Add(bottom_left_corner + offset + randomization);
-                }
-            }
 
-            int numParticles = initial_position_input.Count;
+            float snowball_radius = 0.2f * radius_base;
+            Vector2 center_snowball = new Vector2(-radius_base - 10 * radius_base, (middle_center + top_center) * 0.5f);
+            Vector2 velocity_snowball = new Vector2(200.0f, 0.0f);
             
-            for (int pid = 0; pid < numParticles; pid++)
-            {
-                initial_velocity_input.Add(new Vector2(
-                    60.0f,
-                    0.0f));
-            }
-            */
+            particles.AddRange(SceneBuilder.MakeParticleSphere(center_snowball, velocity_snowball, 0.0f, snowball_radius, particle_spacing,
+                Color.red));
+            
 
+            double wall_width = 20 * radius_base;
+            
+            
             Debug.Log("ParticleCount: " + particles.Count);
             var positions = particles.Select(p => p.Position).ToArray();
             var velocities = particles.Select(p => p.Velocity).ToArray();
-            double wall_width = 100.0;
-            IceSYCLEngine iceSyclEngine = new IceSYCLEngine(positions, velocities, h, WallStiffness, wall_width);
+            
+            IceSYCLEngine iceSyclEngine = new IceSYCLEngine(positions, velocities, h, WallStiffness, wall_width, Density);
             IntPtr Psis = iceSyclEngine.CreateSnowConstitutiveModels(particles.Count, MuConstitutive, LambdaConstitutive, Xi, ThetaC, ThetaS, MaxExp);
             SnowEngine corotatedEngine = new SnowEngine(iceSyclEngine, Psis);
             corotatedEngine.NumStepsPerFrame = num_steps_per_frame;

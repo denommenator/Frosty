@@ -21,7 +21,7 @@ namespace Frosty
         // private static extern void delete_ParticleState(IntPtr particle_state);
 
         [DllImport("libIceSYCL_NativeAPI")]
-        private static extern IntPtr create_engine(int particle_count, IntPtr positions, IntPtr velocities, double h, double wall_stiffness, double wall_length);
+        private static extern IntPtr create_engine(int particle_count, IntPtr positions, IntPtr velocities, double h, double wall_stiffness, double wall_length, double initial_density);
 
         [DllImport("libIceSYCL_NativeAPI")]
         private static extern void copy_current_positions(IntPtr engine, IntPtr current_positions_raw_ptr);
@@ -49,7 +49,8 @@ namespace Frosty
             Vector2[] velocities, 
             double h, 
             double wall_stiffness, 
-            double wall_length)
+            double wall_length,
+            double initial_density)
         {
             Debug.Log(System.IO.File.Exists("Assets/Plugins/libIceSYCL_NativeAPI.so"));
             int numParticles = positions.Length;
@@ -71,7 +72,7 @@ namespace Frosty
             Marshal.Copy(positions_input.ToArray(), 0, positions_raw, positions_input.Count);
             Marshal.Copy(velocities_input.ToArray(), 0, velocities_raw, velocities_input.Count);
 
-            Engine = create_engine(ParticleCount, positions_raw, velocities_raw, h, wall_stiffness, wall_length);
+            Engine = create_engine(ParticleCount, positions_raw, velocities_raw, h, wall_stiffness, wall_length, 1.0f);
 
             Marshal.FreeHGlobal(velocities_raw);
 

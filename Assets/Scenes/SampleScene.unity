@@ -244,11 +244,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1a38c816c35148c79c5a0f3f26330a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NumStepsPerFrame: 2
+  NumStepsPerFrame: 50
   NumDescentSteps: 1
-  NumSecsToSimulate: 2
-  MuDamping: 1
-  Gravity: 981
+  NumSecsToSimulate: 10
+  MuDamping: 0.95
+  Gravity: 0
   H: 1
   NumFramesSimulated: 0
   CurrentFrameNumber: 0
@@ -282,12 +282,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WallStiffness: 1000
-  MuConstitutive: 50000
-  LambdaConstitutive: 50000
+  MuConstitutive: 38000
+  LambdaConstitutive: 58000
   ThetaC: 0.02
   ThetaS: 0.005
   Xi: 10
-  MaxExp: 2
+  MaxExp: 20
+  Density: 0.4
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
