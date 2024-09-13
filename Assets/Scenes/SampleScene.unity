@@ -248,9 +248,9 @@ MonoBehaviour:
   LambdaConstitutive: 100000
   MuDamping: 1
   Gravity: 981
-  NumStepsPerFrame: 400
+  NumStepsPerFrame: 200
   NumDescentSteps: 1
-  NumSecsToSimulate: 10
+  NumSecsToSimulate: 2
   H: 1
   ContinueSimulation: 1
   NumFramesSimulated: 0

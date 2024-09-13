@@ -126,7 +126,7 @@ namespace Frosty
             float particle_spacing = math.sqrt(h * h / num_particles_per_cell);
 
 
-            float radius = 15;
+            float radius = 20;
             Vector2 center_0 = new Vector2(-30, 30);
             Vector2 velocity_0 = new Vector2(150, 0);
             Vector2 center_1 = new Vector2(30, 30.0f + 1.5f * radius);

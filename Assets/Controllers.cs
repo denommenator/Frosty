@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 namespace Frosty
 {
@@ -38,8 +40,15 @@ namespace Frosty
             for(int frame=0; frame < numFrames; frame++)
             {
                 //Debug.Log("Stepping the simulation!");
-                Debug.Log("Running a new frame!");
+                
+                Stopwatch timer = new Stopwatch();
+                timer.Start();
                 IceSYCLEngine.StepFrame(NumStepsPerFrame, NumDescentSteps, MuConstitutive, LambdaConstitutive, MuDamping, Gravity);
+                timer.Stop();
+                var time_ms = timer.ElapsedMilliseconds;
+                string time = time_ms < 1000 ? time_ms.ToString() + " ms" : (time_ms / 1000).ToString() + " seconds";
+                float time_for_second = 50.0f * time_ms / (1000.0f * 60);
+                Debug.Log("Frame took: " + time + ". Simulation time for one film second (minutes): " + time_for_second );
                 Vector3[] particlePositions = IceSYCLEngine.GetPositions();
                 SimulationFrames.QueueNewFrame(particlePositions);
             }
