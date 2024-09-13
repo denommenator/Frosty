@@ -78,10 +78,11 @@ namespace Frosty
             float particle_spacing = math.sqrt(h_float * h_float / num_particles_per_cell);
 
 
-            float radius = 20;
+            float radius = 3;
+            float offset_factor = 0.0f;
             Vector2 center_0 = new Vector2(-30, 30);
             Vector2 velocity_0 = new Vector2(150, 0);
-            Vector2 center_1 = new Vector2(30, 30.0f + 1.5f * radius);
+            Vector2 center_1 = new Vector2(30, 30.0f + offset_factor * 2 * radius);
             Vector2 velocity_1 = new Vector2(-150, 0);
 
             List<Particle> particles =
@@ -132,6 +133,7 @@ namespace Frosty
             corotatedEngine.NumStepsPerFrame = num_steps_per_frame;
             corotatedEngine.MuDamping = mu_damping;
             corotatedEngine.LambdaConstitutive = LambdaConstitutive;
+            corotatedEngine.MuConstitutive = MuConstitutive;
             corotatedEngine.Gravity = gravity;
             return new ParticleController(corotatedEngine, particles);
         }
