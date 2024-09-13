@@ -285,8 +285,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MuConstitutive: 38000
   LambdaConstitutive: 58800
-  ThetaC: 0.01
-  ThetaS: 0.1
+  ThetaC: 0.1
+  ThetaS: 0.048
   Xi: 10
   MaxExp: 20
   Density: 0.4
@@ -307,7 +307,7 @@ MonoBehaviour:
   BaseRadius: 5
   SnowBallSizeFactor: 0.2
   SnowBallHeightFactor: 0.8
-  SnowBallVelocity: {x: 250, y: 60}
+  SnowBallVelocity: {x: 250, y: 30}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -51,7 +51,7 @@ namespace Frosty
 
             float snowball_radius = SnowBallSizeFactor * radius_base;
             float snowman_top = 2 * (radius_base + radius_middle + radius_top);
-            Vector2 center_snowball = new Vector2(-radius_base - 10 * radius_base, SnowBallHeightFactor * snowman_top);
+            Vector2 center_snowball = new Vector2(-radius_base - 4 * radius_base, SnowBallHeightFactor * snowman_top);
             Vector2 velocity_snowball = SnowBallVelocity;
             
             particles.AddRange(SceneBuilder.MakeParticleSphere(center_snowball, velocity_snowball, 0.0f, snowball_radius, particle_spacing,
