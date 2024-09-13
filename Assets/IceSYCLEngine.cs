@@ -38,7 +38,12 @@ namespace Frosty
         [DllImport("libIceSYCL_NativeAPI")]
         private static extern void delete_engine(IntPtr engine);
 
-        public IceSYCLEngine(Vector2[] positions, Vector2[] velocities, double h, double wall_stiffness, double wall_length)
+        public IceSYCLEngine(
+            Vector2[] positions, 
+            Vector2[] velocities, 
+            double h, 
+            double wall_stiffness, 
+            double wall_length)
         {
             Debug.Log(System.IO.File.Exists("Assets/Plugins/libIceSYCL_NativeAPI.so"));
             int numParticles = positions.Length;
@@ -103,4 +108,5 @@ namespace Frosty
 
         }
     }
+    
 }

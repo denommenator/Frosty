@@ -9,30 +9,18 @@ namespace Frosty
 {
     public class ParticleController
     {
-        public ParticleController(IceSYCLEngine iceSYCLEngine, int numStepsPerFrame, int numDescentSteps, double muConstitutive, double lambdaConstitutive, double muDamping, double gravity, List<Particle> particles)
+        public ParticleController(IEngine engine, List<Particle> particles)
         {
             BallRenderer = new BallRenderer(particles);
             SimulationFrames = new SimulationFrames<Vector3[]>();
-            IceSYCLEngine = iceSYCLEngine;
-            MuConstitutive = muConstitutive;
-            LambdaConstitutive = lambdaConstitutive;
-            NumStepsPerFrame = numStepsPerFrame;
-            NumDescentSteps= numDescentSteps;
-            MuDamping = muDamping;
-            Gravity = gravity;
+            Engine = engine;
         }
 
         private BallRenderer BallRenderer;
         private ISimulationFrames<Vector3[]> SimulationFrames;
-        private IceSYCLEngine IceSYCLEngine;
+        public IEngine Engine;
         public PlayerState PlayerState;
         public int FrameNumber = 0;
-        public double MuConstitutive;
-        public double LambdaConstitutive;
-        public double MuDamping;
-        public double Gravity;
-        public int NumStepsPerFrame;
-        public int NumDescentSteps;
         public bool LiveView = true;
 
         public void RunSimulation(int numFrames)
@@ -43,13 +31,13 @@ namespace Frosty
                 
                 Stopwatch timer = new Stopwatch();
                 timer.Start();
-                IceSYCLEngine.StepFrame(NumStepsPerFrame, NumDescentSteps, MuConstitutive, LambdaConstitutive, MuDamping, Gravity);
+                Engine.StepFrame();
                 timer.Stop();
                 var time_ms = timer.ElapsedMilliseconds;
                 string time = time_ms < 1000 ? time_ms.ToString() + " ms" : (time_ms / 1000).ToString() + " seconds";
                 float time_for_second = 50.0f * time_ms / (1000.0f * 60);
                 Debug.Log("Frame took: " + time + ". Simulation time for one film second (minutes): " + time_for_second );
-                Vector3[] particlePositions = IceSYCLEngine.GetPositions();
+                Vector3[] particlePositions = Engine.GetPositions();
                 SimulationFrames.QueueNewFrame(particlePositions);
             }
         }
