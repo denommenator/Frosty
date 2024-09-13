@@ -10,11 +10,11 @@ public class BallRenderer
     {
         Balls = new GameObject[particles.Count];
         //DeformationLines = new GameObject[numParticles];
-
+        float ballShrinkage = 0.5f;
         for (int i = 0; i < Balls.Length; i++)
         {
             Balls[i] = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            Balls[i].transform.localScale = particles[i].Radius * Vector3.one;
+            Balls[i].transform.localScale = ballShrinkage * particles[i].Radius * Vector3.one;
             Balls[i].GetComponent<MeshRenderer>().material = new Material(Shader.Find("Standard"));
             Balls[i].GetComponent<MeshRenderer>().material.color = particles[i].Color;
         }

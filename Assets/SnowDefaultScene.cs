@@ -14,6 +14,7 @@ namespace Frosty
         public float BaseRadius = 5.0f;
         public float SnowBallSizeFactor = 0.2f;
         public float SnowBallHeightFactor = 0.8f;
+        public float SnowBallDistance = 4.0f;
         public Vector2 SnowBallVelocity = 50 * Vector2.right;
         
         public override ParticleController BuildScene(double h, double mu_damping, double gravity, int num_steps_per_frame)
@@ -42,19 +43,20 @@ namespace Frosty
             Vector2 center_top = new Vector2(0, top_center);
 
             List<Particle> particles = new List<Particle>();
-            particles.AddRange(SceneBuilder.MakeParticleSphere(center_base, Vector2.zero, 0.0f, radius_base, particle_spacing, Color.blue));
-            particles.AddRange(SceneBuilder.MakeParticleSphere(center_middle, Vector2.zero, 0.0f, radius_middle, particle_spacing,
+            float number_density_to_spacing_radius = 1.5f;
+            particles.AddRange(SceneBuilder.MakeRandomParticleSphere(center_base, Vector2.zero, 0.0f, radius_base, number_density_to_spacing_radius * particle_spacing, Color.blue));
+            particles.AddRange(SceneBuilder.MakeRandomParticleSphere(center_middle, Vector2.zero, 0.0f, radius_middle, number_density_to_spacing_radius * particle_spacing,
                 Color.blue));
-            particles.AddRange(SceneBuilder.MakeParticleSphere(center_top, Vector2.zero, 0.0f, radius_top, particle_spacing,
+            particles.AddRange(SceneBuilder.MakeRandomParticleSphere(center_top, Vector2.zero, 0.0f, radius_top, number_density_to_spacing_radius * particle_spacing,
                 Color.blue));
 
 
             float snowball_radius = SnowBallSizeFactor * radius_base;
             float snowman_top = 2 * (radius_base + radius_middle + radius_top);
-            Vector2 center_snowball = new Vector2(-radius_base - 4 * radius_base, SnowBallHeightFactor * snowman_top);
+            Vector2 center_snowball = new Vector2(-radius_base - SnowBallDistance * radius_base, SnowBallHeightFactor * snowman_top);
             Vector2 velocity_snowball = SnowBallVelocity;
             
-            particles.AddRange(SceneBuilder.MakeParticleSphere(center_snowball, velocity_snowball, 0.0f, snowball_radius, particle_spacing,
+            particles.AddRange(SceneBuilder.MakeRandomParticleSphere(center_snowball, velocity_snowball, 0.0f, snowball_radius, number_density_to_spacing_radius * particle_spacing,
                 Color.red));
             
 
