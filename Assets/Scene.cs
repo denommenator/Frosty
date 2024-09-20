@@ -13,6 +13,7 @@ namespace Frosty
         
         public int NumStepsPerFrame = 1;
         public int NumDescentSteps = 20;
+        public int MaxNumBacksteps = 20;
         public int NumSecsToSimulate = 5;
         
         public double MuDamping = 1.0;
@@ -28,7 +29,7 @@ namespace Frosty
         private void Start()
         {
             //IBuildScene sceneBuilder = GetComponent<IBuildScene>();
-            Controller = SceneBuilder.BuildScene(H, MuDamping, Gravity, NumStepsPerFrame);
+            Controller = SceneBuilder.BuildScene(H, MuDamping, Gravity, NumStepsPerFrame, NumDescentSteps, MaxNumBacksteps);
         }
         
         private void FixedUpdate()
@@ -47,7 +48,7 @@ namespace Frosty
 
     public abstract class IBuildScene : MonoBehaviour
     {
-        public abstract ParticleController BuildScene(double h, double mu_damping, double gravity, int num_steps_per_frame);
+        public abstract ParticleController BuildScene(double h, double mu_damping, double gravity, int num_steps_per_frame, int num_descent_steps, int max_num_backsteps);
     }
     
 }

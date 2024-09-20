@@ -17,7 +17,7 @@ namespace Frosty
         public float SnowBallDistance = 4.0f;
         public Vector2 SnowBallVelocity = 50 * Vector2.right;
         
-        public override ParticleController BuildScene(double h, double mu_damping, double gravity, int num_steps_per_frame)
+        public override ParticleController BuildScene(double h, double mu_damping, double gravity, int num_steps_per_frame, int num_descent_steps, int max_num_backsteps)
         {
             List<Vector2> initial_position_input = new List<Vector2>();
             List<Vector2> initial_velocity_input = new List<Vector2>();
@@ -69,11 +69,11 @@ namespace Frosty
             
             IceSYCLEngine iceSyclEngine = new IceSYCLEngine(positions, velocities, h, WallStiffness, wall_width, SnowParameters.Density);
             IntPtr Psis = iceSyclEngine.CreateSnowConstitutiveModels(particles.Count, SnowParameters.MuConstitutive, SnowParameters.LambdaConstitutive, SnowParameters.Xi, SnowParameters.ThetaC, SnowParameters.ThetaS, SnowParameters.MaxExp);
-            SnowEngine corotatedEngine = new SnowEngine(iceSyclEngine, Psis);
-            corotatedEngine.NumStepsPerFrame = num_steps_per_frame;
-            corotatedEngine.MuDamping = mu_damping;
-            corotatedEngine.Gravity = gravity;
-            return new ParticleController(corotatedEngine, particles);
+            SnowEngine snowEngine = new SnowEngine(iceSyclEngine, Psis);
+            snowEngine.NumStepsPerFrame = num_steps_per_frame;
+            snowEngine.MuDamping = mu_damping;
+            snowEngine.Gravity = gravity;
+            return new ParticleController(snowEngine, particles);
         }
     }
 }
