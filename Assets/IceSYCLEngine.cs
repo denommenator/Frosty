@@ -86,8 +86,8 @@ namespace Frosty
         
         public void StepFrame(int num_steps_per_frame, int num_descent_steps, int max_num_backsteps, double mu_constitutive, double lambda_constitutive, double mu_damping, double gravity)
         {
-            step_frame_implicit(Engine, num_steps_per_frame, num_descent_steps, max_num_backsteps, mu_constitutive, lambda_constitutive, mu_damping, gravity);
-            //step_frame_explicit(Engine, num_steps_per_frame, mu_constitutive, lambda_constitutive, mu_damping, gravity);
+            //step_frame_implicit(Engine, num_steps_per_frame, num_descent_steps, max_num_backsteps, mu_constitutive, lambda_constitutive, mu_damping, gravity);
+            step_frame_explicit(Engine, num_steps_per_frame, mu_constitutive, lambda_constitutive, mu_damping, gravity);
 
         }
         

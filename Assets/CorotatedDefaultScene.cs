@@ -78,12 +78,12 @@ namespace Frosty
             float particle_spacing = math.sqrt(h_float * h_float / num_particles_per_cell);
 
 
-            float radius = 3;
-            float offset_factor = 0.0f;
-            Vector2 center_0 = new Vector2(-30, 30);
-            Vector2 velocity_0 = new Vector2(150, 0);
-            Vector2 center_1 = new Vector2(30, 30.0f + offset_factor * 2 * radius);
-            Vector2 velocity_1 = new Vector2(-150, 0);
+            float radius = 12;
+            float offset_factor = 0.8f;
+            Vector2 center_0 = new Vector2(-radius, 30);
+            Vector2 velocity_0 = new Vector2(50, 0);
+            Vector2 center_1 = new Vector2(radius, 30.0f + offset_factor * 2 * radius);
+            Vector2 velocity_1 = new Vector2(-50, 0);
 
             List<Particle> particles =
                 SceneBuilder.MakeParticleSphere(center_0, velocity_0, 0.0f, radius, particle_spacing, Color.red);
@@ -127,7 +127,7 @@ namespace Frosty
             Debug.Log("ParticleCount: " + particles.Count);
             var positions = particles.Select(p => p.Position).ToArray();
             var velocities = particles.Select(p => p.Velocity).ToArray();
-            double wall_width = 100.0;
+            double wall_width = 70.0;
             IceSYCLEngine iceSyclEngine = new IceSYCLEngine(positions, velocities, h, WallStiffness, wall_width, 1.0);
             CorotatedEngine corotatedEngine = new CorotatedEngine(iceSyclEngine);
             corotatedEngine.NumStepsPerFrame = num_steps_per_frame;

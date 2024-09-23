@@ -44,11 +44,13 @@ namespace Frosty
 
             List<Particle> particles = new List<Particle>();
             float number_density_to_spacing_radius = 1.5f;
-            particles.AddRange(SceneBuilder.MakeRandomParticleSphere(center_base, Vector2.zero, 0.0f, radius_base, number_density_to_spacing_radius * particle_spacing, Color.blue));
+
+            Color snow_color = Color.white;
+            particles.AddRange(SceneBuilder.MakeRandomParticleSphere(center_base, Vector2.zero, 0.0f, radius_base, number_density_to_spacing_radius * particle_spacing, snow_color));
             particles.AddRange(SceneBuilder.MakeRandomParticleSphere(center_middle, Vector2.zero, 0.0f, radius_middle, number_density_to_spacing_radius * particle_spacing,
-                Color.blue));
+                snow_color));
             particles.AddRange(SceneBuilder.MakeRandomParticleSphere(center_top, Vector2.zero, 0.0f, radius_top, number_density_to_spacing_radius * particle_spacing,
-                Color.blue));
+                snow_color));
 
 
             float snowball_radius = SnowBallSizeFactor * radius_base;
@@ -57,10 +59,10 @@ namespace Frosty
             Vector2 velocity_snowball = SnowBallVelocity;
             
             particles.AddRange(SceneBuilder.MakeRandomParticleSphere(center_snowball, velocity_snowball, 0.0f, snowball_radius, number_density_to_spacing_radius * particle_spacing,
-                Color.red));
+                Color.cyan));
             
 
-            double wall_width = 100 * radius_base;
+            double wall_width = 16 * radius_base;
             
             
             Debug.Log("ParticleCount: " + particles.Count);

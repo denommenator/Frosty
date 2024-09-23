@@ -122,78 +122,103 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &90163194
-GameObject:
+--- !u!1001 &352482849
+PrefabInstance:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 90163197}
-  - component: {fileID: 90163196}
-  - component: {fileID: 90163195}
-  m_Layer: 0
-  m_Name: FixedCorotated
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &90163195
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 90163194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e3083b99bb14334a9ba29009ce72699, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WallStiffness: 1000
-  MuConstitutive: 50000
-  LambdaConstitutive: 50000
---- !u!114 &90163196
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 90163194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1a38c816c35148c79c5a0f3f26330a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SceneBuilder: {fileID: 90163195}
-  NumStepsPerFrame: 10
-  NumDescentSteps: 10
-  MaxNumBacksteps: 20
-  NumSecsToSimulate: 5
-  MuDamping: 1
-  Gravity: 0
-  H: 1
-  NumFramesSimulated: 0
-  CurrentFrameNumber: 0
-  LiveView: 1
-  ContinueSimulation: 1
---- !u!4 &90163197
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 90163194}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.9291167, y: 36.65175, z: -0.4458181}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 420565253985623767, guid: 8c6e28dedd0904848aa1ff8845e91866, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420565253985623767, guid: 8c6e28dedd0904848aa1ff8845e91866, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420565253985623767, guid: 8c6e28dedd0904848aa1ff8845e91866, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420565253985623767, guid: 8c6e28dedd0904848aa1ff8845e91866, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 420565253985623767, guid: 8c6e28dedd0904848aa1ff8845e91866, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420565253985623767, guid: 8c6e28dedd0904848aa1ff8845e91866, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420565253985623767, guid: 8c6e28dedd0904848aa1ff8845e91866, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420565253985623767, guid: 8c6e28dedd0904848aa1ff8845e91866, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420565253985623767, guid: 8c6e28dedd0904848aa1ff8845e91866, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420565253985623767, guid: 8c6e28dedd0904848aa1ff8845e91866, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1480743214002716087, guid: 8c6e28dedd0904848aa1ff8845e91866, type: 3}
+      propertyPath: H
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1480743214002716087, guid: 8c6e28dedd0904848aa1ff8845e91866, type: 3}
+      propertyPath: MuDamping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1480743214002716087, guid: 8c6e28dedd0904848aa1ff8845e91866, type: 3}
+      propertyPath: NumStepsPerFrame
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601408764995567131, guid: 8c6e28dedd0904848aa1ff8845e91866, type: 3}
+      propertyPath: m_Name
+      value: SnowSimulation
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350541760178960644, guid: 8c6e28dedd0904848aa1ff8845e91866, type: 3}
+      propertyPath: SnowBallDistance
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350541760178960644, guid: 8c6e28dedd0904848aa1ff8845e91866, type: 3}
+      propertyPath: SnowBallVelocity.x
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350541760178960644, guid: 8c6e28dedd0904848aa1ff8845e91866, type: 3}
+      propertyPath: SnowBallVelocity.y
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350541760178960644, guid: 8c6e28dedd0904848aa1ff8845e91866, type: 3}
+      propertyPath: SnowBallHeightFactor
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 7865984241491792106, guid: 8c6e28dedd0904848aa1ff8845e91866, type: 3}
+      propertyPath: ThetaC
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 7865984241491792106, guid: 8c6e28dedd0904848aa1ff8845e91866, type: 3}
+      propertyPath: ThetaS
+      value: 0.019
+      objectReference: {fileID: 0}
+    - target: {fileID: 7865984241491792106, guid: 8c6e28dedd0904848aa1ff8845e91866, type: 3}
+      propertyPath: Density
+      value: 0.04
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8c6e28dedd0904848aa1ff8845e91866, type: 3}
 --- !u!1 &1035274501
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,7 +280,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 12.705625
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -291,4 +316,4 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1035274504}
-  - {fileID: 90163197}
+  - {fileID: 352482849}
