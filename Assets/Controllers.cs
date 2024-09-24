@@ -36,7 +36,8 @@ namespace Frosty
                 var time_ms = timer.ElapsedMilliseconds;
                 string time = time_ms < 1000 ? time_ms.ToString() + " ms" : (time_ms / 1000).ToString() + " seconds";
                 float time_for_second = 50.0f * time_ms / (1000.0f * 60);
-                Debug.Log("Frame took: " + time + ". Simulation time for one film second (minutes): " + time_for_second );
+                string time_for_second_string = time_for_second > 1.0 ? time_for_second.ToString() + " minutes" : (60 * time_for_second).ToString() + " seconds";
+                Debug.Log("Frame took: " + time + ". Simulation time for one film second: " + time_for_second_string );
                 Vector3[] particlePositions = Engine.GetPositions();
                 SimulationFrames.QueueNewFrame(particlePositions);
             }
