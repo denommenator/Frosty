@@ -44,6 +44,11 @@ namespace Frosty
             ContinueSimulation = false;
             Controller.Update();
         }
+
+        private void Update()
+        {
+            Controller.Render();
+        }
     }
 
     public abstract class IBuildScene : MonoBehaviour

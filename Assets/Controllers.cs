@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using Debug = UnityEngine.Debug;
 
 namespace Frosty
@@ -14,10 +15,12 @@ namespace Frosty
             BallRenderer = new BallRenderer(particles);
             SimulationFrames = new SimulationFrames<Vector3[]>();
             Engine = engine;
+            RenderedParticlePositions = new Vector3[particles.Count];
         }
 
         private BallRenderer BallRenderer;
         private ISimulationFrames<Vector3[]> SimulationFrames;
+        public Vector3[] RenderedParticlePositions;
         public IEngine Engine;
         public PlayerState PlayerState;
         public int FrameNumber = 0;
@@ -45,7 +48,7 @@ namespace Frosty
 
         public void Update()
         {
-            Vector3[] particlePositions;
+            
             SimulationFrames.UpdateQueuedSimulationFrames();
             if (SimulationFrames.NumCurrentFrames() == 0)
             {
@@ -54,13 +57,13 @@ namespace Frosty
             
             if (LiveView)
             {
-                particlePositions = SimulationFrames.GetFrame(SimulationFrames.NumCurrentFrames() - 1);
+                RenderedParticlePositions = SimulationFrames.GetFrame(SimulationFrames.NumCurrentFrames() - 1);
             }
             else
             {
-                particlePositions = SimulationFrames.GetFrame(FrameNumber);
+                RenderedParticlePositions = SimulationFrames.GetFrame(FrameNumber);
             }
-            BallRenderer.UpdateBallPositions(particlePositions);
+            
             
             if (FrameNumber == SimulationFrames.NumCurrentFrames() - 1)
             {
@@ -72,6 +75,11 @@ namespace Frosty
             }
 
 
+        }
+
+        public void Render()
+        {
+            BallRenderer.UpdateBallPositions(RenderedParticlePositions);
         }
         
         public int NumFramesSimulated()
