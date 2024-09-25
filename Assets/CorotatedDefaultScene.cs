@@ -11,7 +11,7 @@ namespace Frosty
         public double MuConstitutive = 50000;
         public double LambdaConstitutive = 50000;
         
-        public override ParticleController BuildScene(double h, double mu_damping, double gravity, int num_steps_per_frame, int num_descent_steps, int max_num_backsteps)
+        public override ParticleController BuildScene(double h, double mu_damping, double gravity, int num_steps_per_frame, int num_descent_steps, int num_linear_solve_steps, int max_num_backsteps)
         {
             List<Vector2> initial_position_input = new List<Vector2>();
             List<Vector2> initial_velocity_input = new List<Vector2>();
@@ -134,6 +134,7 @@ namespace Frosty
             CorotatedEngine corotatedEngine = new CorotatedEngine(iceSyclEngine);
             corotatedEngine.NumStepsPerFrame = num_steps_per_frame;
             corotatedEngine.NumDescentSteps = num_descent_steps;
+            corotatedEngine.NumLinearSolveSteps = num_linear_solve_steps;
             corotatedEngine.MaxNumBacksteps = max_num_backsteps;
             corotatedEngine.MuDamping = mu_damping;
             corotatedEngine.LambdaConstitutive = LambdaConstitutive;

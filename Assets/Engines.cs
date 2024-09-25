@@ -24,11 +24,12 @@ namespace Frosty
         public double Gravity = 981;
         public int NumStepsPerFrame = 50;
         public int NumDescentSteps = 10;
+        public int NumLinearSolveSteps = 10;
         public int MaxNumBacksteps = 10;
 
         public void StepFrame()
         {
-            Engine.StepFrame(NumStepsPerFrame, NumDescentSteps, MaxNumBacksteps, MuConstitutive, LambdaConstitutive, MuDamping, Gravity);
+            Engine.StepFrame(NumStepsPerFrame, NumDescentSteps, NumLinearSolveSteps, MaxNumBacksteps, MuConstitutive, LambdaConstitutive, MuDamping, Gravity);
         }
 
         public Vector3[] GetPositions()
