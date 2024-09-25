@@ -25,6 +25,7 @@ namespace Frosty
 
         public FrameData GetFrame(int frameNum)
         {
+            //Debug.Log("retrieving frame " + frameNum + " of " + RenderingFrames.Count);
             return RenderingFrames[frameNum];
         }
         

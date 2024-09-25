@@ -80,15 +80,17 @@ namespace Frosty
 
             float radius = 12;
             float offset_factor = 0.8f;
-            Vector2 center_0 = new Vector2(-radius, 30);
+            Vector2 center_0 = new Vector2(-radius, radius);
             Vector2 velocity_0 = new Vector2(50, 0);
-            Vector2 center_1 = new Vector2(radius, 30.0f + offset_factor * 2 * radius);
+            Vector2 center_1 = new Vector2(radius, radius + offset_factor * 2 * radius);
             Vector2 velocity_1 = new Vector2(-50, 0);
 
+            Color color_1 = new Color(1.0f, 0.2f, 0.2f);
+            Color color_2 = new Color(0.2f, 0.2f, 1.0f);
             List<Particle> particles =
-                SceneBuilder.MakeParticleSphere(center_0, velocity_0, 0.0f, radius, particle_spacing, Color.red);
-            particles.AddRange(SceneBuilder.MakeParticleSphere(center_1, velocity_1, 0.0f, radius, particle_spacing,
-                Color.blue));
+                SceneBuilder.MakeRandomParticleSphere(center_0, velocity_0, 0.0f, radius, particle_spacing, color_1);
+            particles.AddRange(SceneBuilder.MakeRandomParticleSphere(center_1, velocity_1, 0.0f, radius, particle_spacing,
+                color_2));
             
             
             

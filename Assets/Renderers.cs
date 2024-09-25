@@ -81,7 +81,7 @@ public class BallRenderer
 
     public void UpdateBallPositions(Vector3[] particlePositions)
     {
-        float ballShrinkage = 0.5f;
+        float ballShrinkage = 1.0f;
         
         for (int i = 0; i < particlePositions.Length; ++i)
         {
@@ -92,8 +92,8 @@ public class BallRenderer
 
         for(int batch = 0; batch < BatchMatrices.Count; ++batch)
         {
-            Matrix4x4[] Matrices = BatchMatrices[batch];
             ParticleMaterials[batch].SetBuffer("_Colors", BatchColors[batch]);
+            Matrix4x4[] Matrices = BatchMatrices[batch];
             Graphics.DrawMeshInstanced(
                 ParticleMesh,
                 0,

@@ -26,6 +26,8 @@ namespace Frosty
         
         public bool ContinueSimulation = true;
 
+        public float SlowDownFactor = 1.0f;
+
         private void Start()
         {
             //IBuildScene sceneBuilder = GetComponent<IBuildScene>();
@@ -42,7 +44,7 @@ namespace Frosty
             NumFramesSimulated = Controller.NumFramesSimulated();
             CurrentFrameNumber = Controller.FrameNumber;
             ContinueSimulation = false;
-            Controller.Update();
+            Controller.FixedUpdate(SlowDownFactor);
         }
 
         private void Update()

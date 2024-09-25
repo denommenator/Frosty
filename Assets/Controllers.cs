@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using Debug = UnityEngine.Debug;
@@ -21,10 +22,12 @@ namespace Frosty
         private BallRenderer BallRenderer;
         private ISimulationFrames<Vector3[]> SimulationFrames;
         public Vector3[] RenderedParticlePositions;
+        public Vector3[] RenderedParticlePositions2;
         public IEngine Engine;
         public PlayerState PlayerState;
         public int FrameNumber = 0;
         public bool LiveView = true;
+        public float FrameTime = 0;
 
         public void RunSimulation(int numFrames)
         {
@@ -46,7 +49,7 @@ namespace Frosty
             }
         }
 
-        public void Update()
+        public void FixedUpdate(float slowdownFactor)
         {
             
             SimulationFrames.UpdateQueuedSimulationFrames();
@@ -58,20 +61,32 @@ namespace Frosty
             if (LiveView)
             {
                 RenderedParticlePositions = SimulationFrames.GetFrame(SimulationFrames.NumCurrentFrames() - 1);
-            }
-            else
-            {
-                RenderedParticlePositions = SimulationFrames.GetFrame(FrameNumber);
-            }
-            
-            
-            if (FrameNumber == SimulationFrames.NumCurrentFrames() - 1)
-            {
-                FrameNumber = 0;
-            }
-            else
-            {
                 FrameNumber++;
+                if (FrameNumber > SimulationFrames.NumCurrentFrames() - 1)
+                    FrameNumber = 0;
+            }
+            else
+            {
+                FrameTime += (50 * Time.fixedDeltaTime) * slowdownFactor;
+                float frameTime = FrameTime;
+                if (frameTime > SimulationFrames.NumCurrentFrames() - 2)
+                {
+                    FrameTime = 0;
+                    frameTime = 0;
+                }
+                
+                int frame = Mathf.FloorToInt(frameTime);
+                FrameNumber = frame;
+                int frame_next = frame + 1;//frame < SimulationFrames.NumCurrentFrames() - 1 ? frame + 1 : frame;
+                float s = frameTime - frame;
+                //Debug.Log("rendering frame " + frameTime);
+                RenderedParticlePositions = SimulationFrames.GetFrame(frame);
+                RenderedParticlePositions2 = SimulationFrames.GetFrame(frame_next);
+                for (int pid = 0; pid < RenderedParticlePositions.Length; ++pid)
+                {
+                    RenderedParticlePositions[pid] = Vector3.Lerp(RenderedParticlePositions[pid], RenderedParticlePositions2[pid], s);
+                }
+
             }
 
 

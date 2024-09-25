@@ -48,7 +48,8 @@ namespace Frosty
         {
             List<Particle> ret = new List<Particle>();
 
-            List<Vector2> positions = PoissonDiscSampling.GeneratePoints(spacing / 2f, 2 * radius * Vector2.one);
+            float number_density_to_spacing_radius = 1.5f;
+            List<Vector2> positions = PoissonDiscSampling.GeneratePoints(number_density_to_spacing_radius * spacing / 2f, 2 * radius * Vector2.one);
             Vector2 lower_corner = center - radius * Vector2.one;
             foreach (Vector2 position in positions)
             {

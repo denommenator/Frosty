@@ -52,7 +52,7 @@ namespace Frosty
             double wall_length,
             double initial_density)
         {
-            Debug.Log(System.IO.File.Exists("Assets/Plugins/libIceSYCL_NativeAPI.so"));
+            Debug.Log("native API plugin available: " + System.IO.File.Exists("Assets/Plugins/libIceSYCL_NativeAPI.so"));
             int numParticles = positions.Length;
             ParticleCount = numParticles;
             List<double> positions_input = new List<double>();
@@ -86,14 +86,13 @@ namespace Frosty
         
         public void StepFrame(int num_steps_per_frame, int num_descent_steps, int max_num_backsteps, double mu_constitutive, double lambda_constitutive, double mu_damping, double gravity)
         {
-            //step_frame_implicit(Engine, num_steps_per_frame, num_descent_steps, max_num_backsteps, mu_constitutive, lambda_constitutive, mu_damping, gravity);
-            step_frame_explicit(Engine, num_steps_per_frame, mu_constitutive, lambda_constitutive, mu_damping, gravity);
+            step_frame_implicit(Engine, num_steps_per_frame, num_descent_steps, max_num_backsteps, mu_constitutive, lambda_constitutive, mu_damping, gravity);
+            //step_frame_explicit(Engine, num_steps_per_frame, mu_constitutive, lambda_constitutive, mu_damping, gravity);
 
         }
         
         public void StepFramePlastic(IntPtr Psis, int num_steps_per_frame, int num_descent_steps, double mu_damping, double gravity)
         {
-            //step_frame_implicit(Engine, num_steps_per_frame, num_descent_steps, mu_constitutive, lambda_constitutive, mu_damping, gravity);
             step_frame_plastic(Engine, Psis, num_steps_per_frame, mu_damping, gravity);
 
         }

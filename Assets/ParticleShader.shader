@@ -44,8 +44,8 @@ Shader "Unlit/ParticleShader"
                 #ifdef UNITY_INSTANCING_ENABLED
                     instance_id = unity_InstanceID;
                 #endif
-                
-                return _Colors[instance_id];
+                fixed4 color = (fixed4)_Colors[instance_id];
+                return color;
             }
             ENDCG
         }

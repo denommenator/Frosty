@@ -136,11 +136,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4235828290615179567, guid: 4363989f504d31bb6949d0ceb4265d62, type: 3}
       propertyPath: H
-      value: 0.7
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235828290615179567, guid: 4363989f504d31bb6949d0ceb4265d62, type: 3}
+      propertyPath: SlowDownFactor
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235828290615179567, guid: 4363989f504d31bb6949d0ceb4265d62, type: 3}
+      propertyPath: MaxNumBacksteps
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235828290615179567, guid: 4363989f504d31bb6949d0ceb4265d62, type: 3}
+      propertyPath: NumDescentSteps
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4235828290615179567, guid: 4363989f504d31bb6949d0ceb4265d62, type: 3}
       propertyPath: NumStepsPerFrame
-      value: 100
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4235828290615179567, guid: 4363989f504d31bb6949d0ceb4265d62, type: 3}
       propertyPath: NumSecsToSimulate
